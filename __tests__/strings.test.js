@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../src/app');
+const sayHello = require('../src/strings.js');
 
 describe('/strings', () => {
   describe('GET /hello/{string}', () => {
@@ -9,6 +10,15 @@ describe('/strings', () => {
         .then(res => {
           expect(res.status).toEqual(200);
           expect(res.body).toEqual({ result: 'Hello, world!' });
+          done();
+        });
+    });
+    xit('returns "Hello, turtle!" when passed "turtle"', done => {
+      request(app)
+        .get('/strings/hello/turtle')
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body).toEqual({ result: 'Hello, turtle!' });
           done();
         });
     });
